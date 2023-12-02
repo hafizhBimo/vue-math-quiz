@@ -2,13 +2,14 @@
 <template>
   <div id="app">
     <h1>Math Quiz App</h1>
-    {{ operator }}
-    <OperatorSelector @changeOperator="changeOperator"/>
+    <OperatorQuiz v-if="operator" :operator="operator" @onBack="clearOperator"/>
+    <OperatorSelector v-if="!operator" @changeOperator="changeOperator"/>
   </div>
 </template>
 
 <script>
 import OperatorSelector from './components/OperatorSelector.vue'
+import OperatorQuiz from './components/OperatorQuiz.vue';
 export default {
     name: "app",
     data() {
@@ -19,9 +20,12 @@ export default {
     methods: {
         changeOperator(operator) {
             this.operator = operator;
+        },
+        clearOperator(){
+          this.operator = null
         }
     },
-    components: {OperatorSelector }
+    components: { OperatorSelector, OperatorQuiz }
 }
 </script>
 
